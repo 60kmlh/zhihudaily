@@ -6,15 +6,15 @@ class Banner extends Component {
     return (
       <div className='index_banner'>
         <Carousel decorators={[]}>
-          <div>
-            <img src="https://mages.weserv.nl/?url=pic3.zhimg.com/v2-42b3513da24602a8c73e351a7fb97d8a.jpg" alt=""/>
-          </div>
-          <div>
-            <img src="https://mages.weserv.nl/?url=pic3.zhimg.com/v2-42b3513da24602a8c73e351a7fb97d8a.jpg" alt=""/>
-          </div>
-          <div>
-            <img src="https://mages.weserv.nl/?url=pic3.zhimg.com/v2-42b3513da24602a8c73e351a7fb97d8a.jpg" alt=""/>
-          </div>
+        {
+          this.props.list.map((item, index) => {
+            return (
+              <div key={item.id}>
+                <img src={'https://images.weserv.nl/?url=' + item.image.replace('https://', '')} alt=""/>
+              </div>
+            )
+          })
+        }
         </Carousel>
       </div>
     )

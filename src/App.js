@@ -10,11 +10,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Artical />
+        <Index />
         {
-        //   <Index />
-        // <SlideList />
-      }
+          // <SlideList />
+        }
       </div>
     )
   }

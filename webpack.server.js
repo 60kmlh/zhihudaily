@@ -129,12 +129,9 @@ module.exports = {
 
 	devServer:{
 		proxy:{
-			'/api':{
-				target:"https://www.easy-mock.com/mock/597588fda1d30433d83b628c/",
+			'/':{
+				target:"https://news-at.zhihu.com",
 				secure:false,
-				pathRewrite:{
-					'/api': ''
-				},
 				changeOrigin: true
 			}
 		},
