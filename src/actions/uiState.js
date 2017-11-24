@@ -1,9 +1,11 @@
-import * as types from '@/constants/ActionType'
+import * as types from '@/constants/ActionTypes'
 
 export function toggleSlide() {
-  dispatch({type: TOGGLE_SLIDE})
+  return (dispatch) => {
+    dispatch({type: types.TOGGLE_SLIDE})
+  }
 }
 
 export function loading() {
-  dispatch({type: TOGGLE_LOADING})
+  dispatch({type: types.TOGGLE_LOADING})
 }

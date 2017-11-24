@@ -1,21 +1,42 @@
 import React, { Component } from 'react'
 import Head from '@/components/Head'
+import { connect } from 'react-redux'
+import { newsAPI } from '@/lib/api'
 import './index.styl'
+import '../../assets/style/article.css'
 
 class Artical extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: {
+        image:''
+      }
+    }
+  }
+  componentDidMount() {
+    console.log(this.props.match.params.id);
+    var that = this
+    axios.get(newsAPI + '/'+ this.props.match.params.id).then(res => {
+      that.setState({
+        data:res.data
+      })
+    })
+  }
   render() {
     return (
       <div className='artical'>
         <Head />
         <div className='artical_banner'>
-          <img src="https://images.weserv.nl/?url=pic4.zhimg.com/v2-3906b3c995be10c4a89a15527479ad93.jpg" alt=""/>
+          <img src={"https://images.weserv.nl/?url=" + this.state.data.image.replace('http://', '').replace('https://', '')} alt=""/>
           <div className='artical_title'>
-            <h2>说到「全球最繁忙的机场」，前一架还没离地，后一架就准备起飞了</h2>
-            <span>Public Domain</span>
+            <h2>{this.state.data.title}</h2>
+            <span>{this.state.data.image_source}</span>
           </div>
         </div>
-        <div className='artical_main'>
-          
+        <div className='artical_main' dangerouslySetInnerHTML={{
+          __html: this.state.data.body
+        }}>
         </div>
         {
           // <div className='artical_bottom'>
@@ -26,5 +47,6 @@ class Artical extends Component {
     )
   }
 }
+
 
 export default Artical

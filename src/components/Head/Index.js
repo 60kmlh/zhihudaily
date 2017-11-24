@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { toggleSlide } from '@/actions/uiState'
 import './index.styl'
 
 class Head extends Component {
@@ -7,9 +9,9 @@ class Head extends Component {
       <div className='head'>
         <div className='head_icon'>
           {this.props.type === 'index' ? 
-            <i className='iconfont icon-other'></i>
+            <i className='iconfont icon-other' onClick={() => this.toggleSlide()}></i>
             :
-            <i className='iconfont icon-return'></i>
+            <i className='iconfont icon-return' onClick={() => window.history.go(-1)}></i>
           }
         </div>
         {
@@ -34,6 +36,9 @@ class Head extends Component {
       </div>
     )
   }
+  toggleSlide() {
+    this.props.dispatch(toggleSlide())
+  }
 }
 
-export default Head
+export default connect()(Head)
