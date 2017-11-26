@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getThemeList } from '@/actions/column'
 import { toggleSlide } from '@/actions/uiState'
 import './index.styl'
@@ -14,7 +15,7 @@ class SlideList extends Component {
         <div
          className='cover' 
          style={{display: this.props.showSlide ? 'block' : 'none'}}
-         onClick={() => this.props.dispatch(toggleSlide())}></div>
+         onClick={() => this.closeSlide()}></div>
         <div className='slidelist_wrap' style = {{transform: this.props.showSlide ? 'translateX(0)' : 'translateX(-100vw)'}}>
           <div className='slidelist_header'>
             <div className='slidelist_header_info'>
@@ -29,70 +30,41 @@ class SlideList extends Component {
             </div>
           </div>
           <div className='slidelist_list'>
-            <div className='slidelist_list_first'>
+            <Link to='/'>
+            <div className='slidelist_list_first' onClick={ () => this.closeSlide()}>
               <i className='iconfont icon-homepage'></i>
-              <span>首页</span>
+                <span>首页</span>
             </div>
+            </Link>
             <ul>
-              <li>
-                <span>日常心理学</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
+              {
+                this.props.theme.map((item, index) => {
+                  return (
+                    <Link to={'/column/' + item.id} key={item.id}>
+                      <li onClick={() => this.closeSlide()}>
+                        <span>{item.name}</span>
+                        <i className='iconfont icon-add'></i>
+                      </li>
+                    </Link>
+                  )
+                })
+              }
             </ul>
           </div>
         </div>
       </div>
     )
   }
+
+  closeSlide() {
+    this.props.dispatch(toggleSlide)
+  }
 }
 
 const mapStateToProps = function(state) {
   return {
-    showSlide: state.uiState.showSlide
+    showSlide: state.uiState.showSlide,
+    theme: state.column.list
   }
 }
 

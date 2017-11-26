@@ -12,31 +12,27 @@ function dayNext() {
   return date
 }
 
-export function get_home_list() {
-  return (dispatch) => {
-    axios.get(latestAPI).then(res => {
-      dispatch({
-        type: types.GET_HOME_LIST,
-        data: {
-          topList: res.data.top_stories,
-          list: [res.data]
-        }
-      })
+export function get_home_list(dispatch) {
+  axios.get(latestAPI).then(res => {
+    dispatch({
+      type: types.GET_HOME_LIST,
+      data: {
+        topList: res.data.top_stories,
+        list: [res.data]
+      }
     })
-  }
+  })
 }
 
-export function add_home_list() {
-  return (dispatch) => {
-    if(loading) return
-    loading = true
-    dayNext()
-    axios.get(beforeAPI + '/' +date.getFullYear() + (date.getMonth()+1) + date.getDate()).then((res) => {
-      loading = false
-      dispatch({
-        type: types.ADD_HOME_LIST,
-        data: res.data
-      })
+export function add_home_list(dispatch) {
+  if(loading) return
+  loading = true
+  dayNext()
+  axios.get(beforeAPI + '/' +date.getFullYear() + (date.getMonth()+1) + date.getDate()).then((res) => {
+    loading = false
+    dispatch({
+      type: types.ADD_HOME_LIST,
+      data: res.data
     })
-  }
+  })
 }

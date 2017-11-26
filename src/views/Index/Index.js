@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import Head from '@/components/Head'
+import Head from '@/components/Head/Index'
 import Banner from './Banner'
-import List from '@/components/List'
+import List from '@/components/List/Index'
 import { connect } from 'react-redux'
 import { get_home_list, add_home_list } from '@/actions/home'
 import './index.styl'
 
 class Index extends Component {
   componentDidMount() {
-    this.props.dispatch(get_home_list())
+    this.props.dispatch(get_home_list)
    //this.props.dispatch(add_home_list())
     window.addEventListener('scroll', this.handleScroll(), false)
   }
@@ -37,7 +37,7 @@ class Index extends Component {
     var that = this
     return () => {
       if(document.body.offsetHeight - window.innerHeight - window.pageYOffset < 50) {
-        that.props.dispatch(add_home_list())
+        that.props.dispatch(add_home_list)
       }
     }
     // var documentH = document.body.offsetHeight

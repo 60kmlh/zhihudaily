@@ -37,7 +37,7 @@ class Head extends Component {
     )
   }
   toggleSlide() {
-    this.props.dispatch(toggleSlide())
+    this.props.dispatch(toggleSlide)
   }
 }
 

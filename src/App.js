@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import './assets/style/app.styl'
 import '@/assets/style/iconfont.css'
-import Index from './views/Index'
-import SlideList from '@/components/SlideList'
+import Index from './views/Index/Index'
+import SlideList from '@/components/SlideList/Index'
 import { Route } from 'react-router-dom'
-import Artical from '@/views/Article'
+import Article from '@/views/Article/Index'
+import Column from '@/views/Column/Index'
 
 class App extends Component {
   render() {
@@ -12,7 +13,8 @@ class App extends Component {
       <div>
         <SlideList />
         <Route exact path='/' component={Index}></Route>
-        <Route exact path='/article/:id' component={Artical}></Route>
+        <Route exact path='/theme/:id' component={Column}></Route>
+        <Route exact path='/article/:id' component={Article}></Route>
       </div>
     )
   }

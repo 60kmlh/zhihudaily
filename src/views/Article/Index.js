@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Head from '@/components/Head'
+import Head from '@/components/Head/Index'
 import { connect } from 'react-redux'
 import { newsAPI } from '@/lib/api'
 import './index.styl'
