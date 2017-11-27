@@ -5,6 +5,6 @@ export const GET_HOME_LIST = 'GET_HOME_LIST'
 export const ADD_HOME_LIST = 'ADD_HOME_LIST'
 
 export const GET_THEME_LIST = 'GET_THEME_LIST'
-export const GET_CUR_COLUMN = 'GET_CUR_COLUMN'
+export const GET_THEME_CONTENT = 'GET_THEME_CONTENT'
 
 export const GET_CUR_ARTICLE = 'GET_CUR_ARTICLE'

@@ -11,13 +11,18 @@ class List extends Component {
           {
             this.props.list.map((item, index) => {
               return (
-                <Link to={{pathname:'article/'+item.id}} key={item.id}>
+                <Link to={{pathname:'/article/'+item.id}} key={item.id}>
                   <li className='list_item'>
                     <div className='list_item_left'>
                       <p>{item.title}</p>
                     </div>
                     <div className='list_item_right'>
-                      <img src={"https://images.weserv.nl/?url=" + item.images[0].replace('http://', '').replace('https://', '')} alt=""/>
+                      {
+                        item.images ? 
+                        <img src={"https://images.weserv.nl/?url=" + item.images[0].replace('http://', '').replace('https://', '')} alt=""/>
+                        :
+                        null
+                      }
                     </div>
                   </li>
                 </Link>

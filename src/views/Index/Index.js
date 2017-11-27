@@ -10,6 +10,7 @@ class Index extends Component {
   componentDidMount() {
     this.props.dispatch(get_home_list)
    //this.props.dispatch(add_home_list())
+   console.log('object');
     window.addEventListener('scroll', this.handleScroll(), false)
   }
   componentWillUnmount() {
@@ -20,7 +21,7 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <Head type='index' />
+        <Head type='index' title='首页' />
         <Banner list={this.props.topList} />
         {
           this.props.list.map((item, index) => {

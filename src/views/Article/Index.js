@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Head from '@/components/Head/Index'
 import { connect } from 'react-redux'
-import { newsAPI } from '@/lib/api'
+import { newsAPI, extraAPI } from '@/lib/api'
 import './index.styl'
 import '../../assets/style/article.css'
 
@@ -10,25 +10,37 @@ class Artical extends Component {
     super(props)
     this.state = {
       data: {
-        image:''
+        images:['']
+      },
+      extra: {
+        comments:'',
+        popularity: ''
       }
     }
   }
   componentDidMount() {
-    console.log(this.props.match.params.id);
     var that = this
     axios.get(newsAPI + '/'+ this.props.match.params.id).then(res => {
       that.setState({
         data:res.data
       })
     })
+    axios.get(extraAPI + '/' + this.props.match.params.id).then(res => {
+      that.setState({
+        extra: res.data
+      })
+    })
   }
   render() {
     return (
       <div className='artical'>
-        <Head />
+        <Head comments={this.state.extra.comments} popularity={this.state.extra.popularity} />
         <div className='artical_banner'>
-          <img src={"https://images.weserv.nl/?url=" + this.state.data.image.replace('http://', '').replace('https://', '')} alt=""/>
+          {
+            this.state.data.images ?
+            <img src={"https://images.weserv.nl/?url=" + this.state.data.images[0].replace('http://', '').replace('https://', '')} alt=""/>
+            : null
+          }
           <div className='artical_title'>
             <h2>{this.state.data.title}</h2>
             <span>{this.state.data.image_source}</span>

@@ -1,14 +1,14 @@
 import * as types from '@/constants/ActionTypes'
 
-function column(state = {list: [], cur_column: {}}, action) {
+function theme(state = {list: [], theme_content: {stories:[]}}, action) {
   switch(action.type) {
     case types.GET_THEME_LIST:
       return Object.assign({}, state, {list: action.data})
-    case types.GET_CUR_COLUMN:
-      return Object.assign({}, state, {cur_colum: action.data})
+    case types.GET_THEME_CONTENT:
+      return Object.assign({}, state, {theme_content: action.data})
     default:
       return state
   }
 }
 
-export default column
+export default theme

@@ -16,7 +16,7 @@ class Head extends Component {
         </div>
         {
           this.props.type === 'index' ?
-          <div className='head_title'>首页</div>
+          <div className='head_title'>{this.props.title}</div>
           :
           null
         }
@@ -26,9 +26,9 @@ class Head extends Component {
             <i className='iconfont icon-share'></i>
             <i className='iconfont icon-collection'></i>
             <i className='iconfont icon-interactive'></i>
-            <span>12</span>
+            <span>{this.props.comments}</span>
             <i className='iconfont icon-praise'></i>
-            <span>43</span>
+            <span>{this.props.popularity}</span>
           </div>
           :
           null

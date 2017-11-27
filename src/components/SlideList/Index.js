@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getThemeList } from '@/actions/column'
+import { getThemeList } from '@/actions/theme'
 import { toggleSlide } from '@/actions/uiState'
 import './index.styl'
 
@@ -40,7 +40,7 @@ class SlideList extends Component {
               {
                 this.props.theme.map((item, index) => {
                   return (
-                    <Link to={'/column/' + item.id} key={item.id}>
+                    <Link to={'/theme/' + item.id} key={item.id}>
                       <li onClick={() => this.closeSlide()}>
                         <span>{item.name}</span>
                         <i className='iconfont icon-add'></i>
@@ -64,7 +64,7 @@ class SlideList extends Component {
 const mapStateToProps = function(state) {
   return {
     showSlide: state.uiState.showSlide,
-    theme: state.column.list
+    theme: state.theme.list
   }
 }
 

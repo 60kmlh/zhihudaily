@@ -5,7 +5,7 @@ import Index from './views/Index/Index'
 import SlideList from '@/components/SlideList/Index'
 import { Route } from 'react-router-dom'
 import Article from '@/views/Article/Index'
-import Column from '@/views/Column/Index'
+import Theme from '@/views/Theme/Index'
 
 class App extends Component {
   render() {
@@ -13,7 +13,7 @@ class App extends Component {
       <div>
         <SlideList />
         <Route exact path='/' component={Index}></Route>
-        <Route exact path='/theme/:id' component={Column}></Route>
+        <Route exact path='/theme/:id' component={Theme}></Route>
         <Route exact path='/article/:id' component={Article}></Route>
       </div>
     )
