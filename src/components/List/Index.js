@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { proxyImg } from '@/lib/utils'
 import './index.styl'
 
 class List extends Component {
   render() {
     return (
       <div className='list'>
-        <h2 className='title'>{this.props.title}</h2>
+        <h2 className='title' >{this.props.title}</h2>
+        {this.props.children}
         <ul>
           {
             this.props.list.map((item, index) => {
@@ -19,7 +21,7 @@ class List extends Component {
                     <div className='list_item_right'>
                       {
                         item.images ? 
-                        <img src={"https://images.weserv.nl/?url=" + item.images[0].replace('http://', '').replace('https://', '')} alt=""/>
+                        <img src={proxyImg(item.images[0])} alt=""/>
                         :
                         null
                       }

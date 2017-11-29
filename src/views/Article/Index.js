@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Head from '@/components/Head/Index'
 import { connect } from 'react-redux'
 import { newsAPI, extraAPI } from '@/lib/api'
+import { proxyImg } from '@/lib/utils'
 import './index.styl'
 import '../../assets/style/article.css'
 
@@ -34,11 +35,14 @@ class Artical extends Component {
   render() {
     return (
       <div className='artical'>
-        <Head comments={this.state.extra.comments} popularity={this.state.extra.popularity} />
+        <Head
+         comments={this.state.extra.comments} 
+         popularity={this.state.extra.popularity}
+         shareLink={this.state.data.share_url} />
         <div className='artical_banner'>
           {
             this.state.data.images ?
-            <img src={"https://images.weserv.nl/?url=" + this.state.data.images[0].replace('http://', '').replace('https://', '')} alt=""/>
+            <img src={proxyImg(this.state.data.images[0])} alt=""/>
             : null
           }
           <div className='artical_title'>

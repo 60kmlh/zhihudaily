@@ -1,6 +1,6 @@
 import * as types from '@/constants/ActionTypes'
 
-function theme(state = {list: [], theme_content: {stories:[]}}, action) {
+function theme(state = {list: [], theme_content: {stories:[], image:'', editors:[]}}, action) {
   switch(action.type) {
     case types.GET_THEME_LIST:
       return Object.assign({}, state, {list: action.data})

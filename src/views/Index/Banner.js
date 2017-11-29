@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { proxyImg } from '@/lib/utils'
 import Carousel from 'nuka-carousel'
 
 class Banner extends Component {
@@ -10,7 +11,10 @@ class Banner extends Component {
           this.props.list.map((item, index) => {
             return (
               <div key={item.id}>
-                <img src={'https://images.weserv.nl/?url=' + item.image.replace('https://', '')} alt=""/>
+                <img src={proxyImg(item.image)} alt=""/>
+                <div className="artical_title">
+                  <h2>{item.title}</h2>
+                </div>
               </div>
             )
           })

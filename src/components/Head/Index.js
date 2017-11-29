@@ -23,7 +23,7 @@ class Head extends Component {
         {
           this.props.type !== 'index' ?
           <div className='head_icon_wrap'>
-            <i className='iconfont icon-share'></i>
+            <i className='iconfont icon-share' onClick={() => this.copyLink()}></i>
             <i className='iconfont icon-collection'></i>
             <i className='iconfont icon-interactive'></i>
             <span>{this.props.comments}</span>
@@ -38,6 +38,15 @@ class Head extends Component {
   }
   toggleSlide() {
     this.props.dispatch(toggleSlide)
+  }
+  copyLink() {
+    var el = document.createElement('input')
+    el.value = this.props.shareLink
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand("Copy")
+    alert('分享链接已复制！')
+    document.body.removeChild(el)
   }
 }
 
