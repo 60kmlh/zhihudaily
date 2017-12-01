@@ -49,11 +49,14 @@ module.exports = {
 				exclude:/node_modules/,
 				loader:'babel-loader',
 				query:{
-					"presets":['react',['es2015',{"modules": false}]],
+					"presets":['react',"stage-0"],
 					'plugins':['syntax-dynamic-import',["transform-runtime", {
 											"polyfill": true,
 											"regenerator": true
-										}]]
+										}],
+										"transform-async-to-generator",
+                    "transform-decorators-legacy"]
+										//transform-class-properties插件导致mobx数据不能观察到更新。。。使用preset-satge-0代替
 				}
 			},
 			{ 
@@ -129,12 +132,9 @@ module.exports = {
 
 	devServer:{
 		proxy:{
-			'/api':{
-				target:"https://www.easy-mock.com/mock/597588fda1d30433d83b628c/",
+			'/':{
+				target:"https://news-at.zhihu.com",
 				secure:false,
-				pathRewrite:{
-					'/api': ''
-				},
 				changeOrigin: true
 			}
 		},

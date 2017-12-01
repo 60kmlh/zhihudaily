@@ -1,38 +1,53 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import './index.styl'
 
+@inject('rootStore')
+@observer
 class Head extends Component {
   render() {
     return (
       <div className='head'>
         <div className='head_icon'>
           {this.props.type === 'index' ? 
-            <i className='iconfont icon-other'></i>
+            <i className='iconfont icon-other' onClick={() => this.toggleSlide()}></i>
             :
-            <i className='iconfont icon-return'></i>
+            <i className='iconfont icon-return' onClick={() => window.history.go(-1)}></i>
           }
         </div>
         {
           this.props.type === 'index' ?
-          <div className='head_title'>首页</div>
+          <div className='head_title'>{this.props.title}</div>
           :
           null
         }
         {
           this.props.type !== 'index' ?
           <div className='head_icon_wrap'>
-            <i className='iconfont icon-share'></i>
+            <i className='iconfont icon-share' onClick={() => this.copyLink()}></i>
             <i className='iconfont icon-collection'></i>
             <i className='iconfont icon-interactive'></i>
-            <span>12</span>
+            <span>{this.props.comments}</span>
             <i className='iconfont icon-praise'></i>
-            <span>43</span>
+            <span>{this.props.popularity}</span>
           </div>
           :
           null
         }
       </div>
     )
+  }
+  toggleSlide() {
+    this.props.rootStore.uiStore.toggle_slide()
+  }
+  copyLink() {
+    var el = document.createElement('input')
+    el.value = this.props.shareLink
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand("Copy")
+    alert('分享链接已复制！')
+    document.body.removeChild(el)
   }
 }
 

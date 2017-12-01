@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { observer, inject } from 'mobx-react'
 import './index.styl'
+
+@inject('rootStore')
+@observer
 class SlideList extends Component {
+  componentDidMount() {
+    this.props.rootStore.themeStore.get_theme_list()
+  }
   render() {
+    var {uiStore, themeStore} = this.props.rootStore
     return (
       <div className='slidelist'>
-        <div className='cover'></div>
-        <div className='slidelist_wrap'>
+        <div
+         className='cover' 
+         style={{display: uiStore.showSlide ? 'block' : 'none'}}
+         onClick={() => this.closeSlide()}></div>
+        <div className='slidelist_wrap' style = {{transform: uiStore.showSlide ? 'translateX(0)' : 'translateX(-100vw)'}}>
           <div className='slidelist_header'>
             <div className='slidelist_header_info'>
               <img src="http://7xqch8.com1.z0.glb.clouddn.com/4.pic_hd.jpg" alt=""/>
@@ -19,65 +31,36 @@ class SlideList extends Component {
             </div>
           </div>
           <div className='slidelist_list'>
-            <div className='slidelist_list_first'>
+            <Link to='/'>
+            <div className='slidelist_list_first' onClick={ () => this.closeSlide()}>
               <i className='iconfont icon-homepage'></i>
-              <span>首页</span>
+                <span>首页</span>
             </div>
+            </Link>
             <ul>
-              <li>
-                <span>日常心理学</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
-              <li>
-                <span>用户推荐日报</span>
-                <i className='iconfont icon-add'></i>
-              </li>
+              {
+                themeStore.theme_list.map((item, index) => {
+                  return (
+                    <Link to={'/theme/' + item.id} key={item.id}>
+                      <li onClick={() => this.closeSlide()}>
+                        <span>{item.name}</span>
+                        <i className='iconfont icon-add'></i>
+                      </li>
+                    </Link>
+                  )
+                })
+              }
             </ul>
           </div>
         </div>
       </div>
     )
   }
+
+  closeSlide() {
+    this.props.rootStore.uiStore.toggle_slide()
+  }
 }
+
 
 export default SlideList

@@ -64,10 +64,12 @@ module.exports = {
               loader:'babel-loader',
               query:{
                 "presets":['react',['es2015',{"modules": false}],"stage-0"],
-                'plugins':['syntax-dynamic-import',["transform-runtime", {
-                            "polyfill": true,
-                            "regenerator": true
-                          }]]
+					      'plugins':['syntax-dynamic-import',["transform-runtime", {
+											"polyfill": true,
+											"regenerator": true
+										}],
+										"transform-async-to-generator",
+                    "transform-decorators-legacy"]
               }
             },
             { 
