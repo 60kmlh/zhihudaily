@@ -28,7 +28,13 @@ export function add_home_list(dispatch) {
   if(loading) return
   loading = true
   dayNext()
-  axios.get(beforeAPI + '/' +date.getFullYear() + (date.getMonth()+1) + date.getDate()).then((res) => {
+  axios.get(
+    beforeAPI + 
+    '/' + 
+    date.getFullYear() + 
+    (date.getMonth()+1) + 
+    (date.getDate().toString().length<2 ? '0'+date.getDate() : date.getDate())
+  ).then((res) => {
     loading = false
     dispatch({
       type: types.ADD_HOME_LIST,
